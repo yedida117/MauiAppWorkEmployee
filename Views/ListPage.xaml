@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppWorkEmployee.Views.ListPage"
+             FlowDirection="RightToLeft"
+             BackgroundColor="#F4F6F9">
+             
+  
+            
+
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- כותרת ראשית -->
+                <Label Text="פירוט מקומות עבודה בשנה האחרונה" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="#2C3E50"
+                   HorizontalOptions="Center" 
+                   Margin="0,10,0,20"/>
+
+          
+            <Button
+                x:Name="ListBtn"
+                Text="show list " 
+                SemanticProperties.Hint="list data"
+                Clicked="OnSearchButtonClicked"
+                HorizontalOptions="Fill" />
+
+
+            <!-- כותרת הטבלה (Header) -->
+                <Grid BackgroundColor="#2C3E50" Padding="12,10" Margin="0,0,0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="סוג עבודה" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="1" Text="מיקום" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="2" Text="תאריך" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="3" Text="שעות" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="4" Text="שכר לשעה" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <!-- רשימת הנתונים (שורות הטבלה) -->
+                <CollectionView x:Name="JobsCollectionView" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="12" Margin="0,1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="1.2*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- עיצוב רקע מתחלף לשורות (אפקט זברה עדין) -->
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <!-- נתוני השורה עם קישור (Binding) למודל WorkHistory -->
+                                <Label Grid.Column="0" Text="{Binding JobType}" TextColor="#333333" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding Location}" TextColor="#333333" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding WorkDate, StringFormat='{0:dd/MM/yyyy}'}" TextColor="#666666" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Label Grid.Column="3" Text="{Binding HoursWorked}" TextColor="#333333" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Label Grid.Column="4" Text="{Binding HourlyRate, StringFormat='₪{0:F2}'}" TextColor="#27AE60" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <!-- הודעה שמופיעה במידה והרשימה ריקה -->
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="30">
+                            <Label Text="לא נמצאו נתוני עבודה להצגה" FontAttributes="Italic" TextColor="#7F8C8D" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+</VerticalStackLayout>
+           </ScrollView>
+    </ContentPage>
+

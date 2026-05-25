@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppWorkEmployee.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="100"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                Text="welcome to my works app"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+          
+
+            <Button
+                x:Name="CounterBtn"
+                Text="save data" 
+                SemanticProperties.Hint="save data"
+                Clicked="OnSaveButtonClicked"
+                HorizontalOptions="Fill" />
+
+
+            <Button
+               x:Name="ListBtn"
+               Text="list data" 
+               SemanticProperties.Hint="list data"
+               Clicked="OnListButtonClicked"
+               HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="DeleteBtn"
+                Text="delete data" 
+                SemanticProperties.Hint="delete data"
+                Clicked="OnDeleteButtonClicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="UpdateBtn"
+                Text="update data" 
+                SemanticProperties.Hint="update data"
+                Clicked="OnUpdateButtonClicked"
+                HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
