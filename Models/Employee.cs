@@ -16,5 +16,6 @@ namespace MauiAppWorkEmployee.Models
 
         // רשימת מקומות העבודה בשנה האחרונה
         public List<WorkHistory> WorkHistories { get; set; } = new List<WorkHistory>();
+        public List<string> WorkId { get; set; } = new List<string>();
     }
 }

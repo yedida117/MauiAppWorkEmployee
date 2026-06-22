@@ -24,7 +24,7 @@
                 x:Name="ListBtn"
                 Text="show list " 
                 SemanticProperties.Hint="list data"
-                Clicked="OnSearchButtonClicked"
+                Clicked="OnSearchButtonClicked2"
                 HorizontalOptions="Fill" />
 
 
@@ -46,7 +46,8 @@
                 </Grid>
 
                 <!-- רשימת הנתונים (שורות הטבלה) -->
-                <CollectionView x:Name="JobsCollectionView" SelectionMode="None">
+             <CollectionView x:Name="JobsCollectionView" SelectionMode="None">
+              
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="12" Margin="0,1">

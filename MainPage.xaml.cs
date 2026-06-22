@@ -58,6 +58,51 @@ namespace MauiAppWorkEmployee
             }
         }
 
+        private async void OnSaveButtonClicked2(object sender, EventArgs e)
+        {
+            // 1. יצירת אובייקט העובד והזנת נתונים
+            var newEmployee = new Employee
+            {
+                Name = "adam first",
+                Email = "adam@email.com",
+                Password = "Password123", // שים לב: באפליקציית ייצור מומלץ להשתמש ב-Firebase Authentication לניהול סיסמאות
+                BirthYear = 1988
+            };
+
+            // 2. הוספת מקומות עבודה מהשנה האחרונה לרשימה
+            newEmployee.WorkHistories.Add(new WorkHistory
+            {
+                JobType = "פיתוח תוכנה",
+                Location = "תל אביב",
+                WorkDate = DateTime.Now.AddMonths(-3),
+                HoursWorked = 160,
+                HourlyRate = 85.5
+            });
+
+            newEmployee.WorkHistories.Add(new WorkHistory
+            {
+                JobType = "תמיכה טכנית",
+                Location = "חיפה",
+                WorkDate = DateTime.Now.AddMonths(-8),
+                HoursWorked = 45,
+                HourlyRate = 50.0
+            });
+
+            // 3. שליחה ושמירה ב-Firebase Realtime Database
+            bool isSuccess = await _firebaseService.SaveTAsync("Employees",newEmployee);
+
+            if (isSuccess)
+            {
+                await DisplayAlert("הצלחה", "נתוני העובד והיסטוריית העבודה נשמרו בהצלחה!", "אישור");
+            }
+            else
+            {
+                await DisplayAlert("שגיאה", "נכשלה שמירת הנתונים בשרת.", "אישור");
+            }
+        }
+
+
+
         private async void OnListButtonClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("/ListPage");
@@ -72,6 +117,23 @@ namespace MauiAppWorkEmployee
         {
             await Shell.Current.GoToAsync("/UpdatePage");
         }
+
+        private async void OnProfileButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("/ProfilePage");
+        }
+
+        private async void OnLoginButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("/LoginPage");
+        }
+
+        private async void OnAddWorkButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("/AddWorkPage2");
+        }
+
+        
     }
 }
 

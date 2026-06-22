@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiAppWorkEmployee.ViewModel;
+using MauiAppWorkEmployee.Views;
+using Microsoft.Extensions.Logging;
 
 namespace MauiAppWorkEmployee
 {
@@ -18,7 +20,8 @@ namespace MauiAppWorkEmployee
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddTransient<AddWorkPage2>();
+            builder.Services.AddTransient<AddWorkVm>();
             return builder.Build();
         }
     }

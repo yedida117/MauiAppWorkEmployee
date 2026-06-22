@@ -23,14 +23,16 @@
             <Button
                 x:Name="CounterBtn"
                 Text="save data" 
+                WidthRequest="200"
                 SemanticProperties.Hint="save data"
-                Clicked="OnSaveButtonClicked"
+                Clicked="OnSaveButtonClicked2"
                 HorizontalOptions="Fill" />
 
 
             <Button
                x:Name="ListBtn"
                Text="list data" 
+                  WidthRequest="200"
                SemanticProperties.Hint="list data"
                Clicked="OnListButtonClicked"
                HorizontalOptions="Fill" />
@@ -38,6 +40,7 @@
             <Button
                 x:Name="DeleteBtn"
                 Text="delete data" 
+                  WidthRequest="200"
                 SemanticProperties.Hint="delete data"
                 Clicked="OnDeleteButtonClicked"
                 HorizontalOptions="Fill" />
@@ -45,9 +48,36 @@
             <Button
                 x:Name="UpdateBtn"
                 Text="update data" 
+                  WidthRequest="200"
                 SemanticProperties.Hint="update data"
                 Clicked="OnUpdateButtonClicked"
                 HorizontalOptions="Fill" />
+
+            <Button
+     x:Name="ProfileBtn"
+     Text="profile data" 
+       WidthRequest="200"
+     SemanticProperties.Hint="profile data"
+     Clicked="OnProfileButtonClicked"
+     HorizontalOptions="Fill" />
+
+            <Button
+x:Name="LoginBtn"
+Text="login" 
+  WidthRequest="200"
+SemanticProperties.Hint="login"
+Clicked="OnLoginButtonClicked"
+HorizontalOptions="Fill" />
+
+
+
+            <Button
+x:Name="AddWorkBtn"
+Text="add work" 
+  WidthRequest="200"
+SemanticProperties.Hint="add work"
+Clicked="OnAddWorkButtonClicked"
+HorizontalOptions="Fill" />
 
         </VerticalStackLayout>
     </ScrollView>

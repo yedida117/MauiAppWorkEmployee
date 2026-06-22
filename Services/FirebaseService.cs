@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
 using MauiAppWorkEmployee.Models;
+using System.Collections.Generic;
 
 namespace MauiAppWorkEmployee.Services
 {
@@ -8,6 +9,7 @@ namespace MauiAppWorkEmployee.Services
     {
 
         private readonly FirebaseClient _firebaseClient;
+
 
         public FirebaseService()
         {
@@ -42,6 +44,100 @@ namespace MauiAppWorkEmployee.Services
             }
         }
 
+        public async Task<bool> SaveWorkAsync(WorkHistory work)
+        {
+            try
+            {
+                // יצירת רשומה חדשה תחת ענף "Employees" וקבלת מזהה ייחודי
+                var result = await _firebaseClient
+                    .Child("Works")
+                    .PostAsync(work);
+
+                // עדכון ה-Id של האובייקט המקומי במפתח שנוצר ב-Firebase (אופציונלי)
+                work.JodId = result.Key;
+              
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // כאן ניתן להוסיף לוג לשגיאות
+                System.Diagnostics.Debug.WriteLine($"Error saving to Firebase: {ex.Message}");
+                return false;
+            }
+        }
+
+
+
+        public async Task<bool> SaveTAsync<T>(string cName,T obj)
+        {
+            try
+            {
+                // יצירת רשומה חדשה תחת ענף "Employees" וקבלת מזהה ייחודי
+                var result = await _firebaseClient
+                    .Child(cName)
+                    .PostAsync(obj);
+
+                // עדכון ה-Id של האובייקט המקומי במפתח שנוצר ב-Firebase (אופציונלי)
+                string Id = result.Key;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // כאן ניתן להוסיף לוג לשגיאות
+                System.Diagnostics.Debug.WriteLine($"Error saving to Firebase: {ex.Message}");
+                return false;
+            }
+        }
+
+
+        public async Task<Employee> GetEmployeeByEmailAsync(string searchEmail)
+        {
+            try
+            {
+                var allEmployees = await _firebaseClient.Child("Employees").OnceAsync<Employee>();
+
+                // חיפוש העובד לפי מייל בשורה אחת
+                var target = allEmployees.FirstOrDefault(e => e.Object.Email == searchEmail);
+
+                if (target == null) return null; // אם לא נמצא, נחזיר null
+
+                // הזרקת המפתח של Firebase לתוך האובייקט והחזרתו
+                target.Object.Id = target.Key;
+                return target.Object;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+
+
+
+
+        public async Task<Employee> GetEmployeeByPasswordAsync(string value)
+        {
+            try
+            {
+                var allEmployees = await _firebaseClient.Child("Employees").OnceAsync<Employee>();
+
+                // חיפוש העובד לפי מייל בשורה אחת
+                var target = allEmployees.FirstOrDefault(e => e.Object.Password == value);
+
+                if (target == null) return null; // אם לא נמצא, נחזיר null
+
+                // הזרקת המפתח של Firebase לתוך האובייקט והחזרתו
+                target.Object.Id = target.Key;
+                return target.Object;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
 
 
         /// <summary>
@@ -186,6 +282,34 @@ namespace MauiAppWorkEmployee.Services
                 return false;
             }
         }
+
+        public async Task<List<WorkHistory>> GetWorksAsync()
+        {
+            try
+            {
+                var allWorks = await _firebaseClient.Child("Works").OnceAsync<WorkHistory>();
+                List<WorkHistory> works = new List<WorkHistory>();
+
+                // חיפוש העובד לפי מייל בשורה אחת
+                //var target = allEmployees.FirstOrDefault(e => e.Object.Email == searchEmail);
+
+               if (allWorks == null) return null; // אם לא נמצא, נחזיר null
+
+                // הזרקת המפתח של Firebase לתוך האובייקט והחזרתו
+
+                foreach (var work in allWorks)
+                {
+                    works.Add(work.Object);
+                }
+                return works;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+
 
 
     }

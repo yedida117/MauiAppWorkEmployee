@@ -6,7 +6,12 @@
         <StackLayout>
             <Label Text="Welcome to update data"
                 />
-
+            <Button
+x:Name="UpdateBtn"
+Text="update action " 
+SemanticProperties.Hint="update"
+Clicked="OnUpdateButtonClicked"
+HorizontalOptions="Fill" />
            
         </StackLayout>
     </ContentPage.Content>

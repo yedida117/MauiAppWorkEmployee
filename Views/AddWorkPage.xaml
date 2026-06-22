@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppWorkEmployee.Views.AddWorkPage"
+   
+             Title="הוספת מקום עבודה"
+             FlowDirection="RightToLeft"
+             BackgroundColor="#F4F6F9">
+
+        <ScrollView>
+            <VerticalStackLayout Padding="24" Spacing="18" >
+
+                <!-- כותרת אייקונית עליונה -->
+                <VerticalStackLayout HorizontalOptions="Center" Margin="0,0,0,10" Spacing="5">
+                    <Label Text="💼" FontSize="44" HorizontalOptions="Center"/>
+                    <Label Text="טופס דיווח שעות עבודה" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="#2C3E50" 
+                       HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- מזהה עבודה (Job ID) -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="מזהה עבודה (Job ID):" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="5,0">
+                        <Entry x:Name="JobIdEntry" Placeholder="הקלידי קוד/מזהה עבודה" TextColor="#2C3E50"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- סוג העבודה -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="סוג העבודה:" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="5,0">
+                        <Entry x:Name="JobTypeEntry" Placeholder="לדוגמה: פיתוח, תמיכה, מלצרות" TextColor="#2C3E50"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- מקום העבודה -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="מקום / מיקום:" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="5,0">
+                        <Entry x:Name="LocationEntry" Placeholder="לדוגמה: תל אביב, סניף ראשי" TextColor="#2C3E50"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- תאריך העבודה -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="תאריך ביצוע העבודה:" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="10,5">
+                        <!-- רכיב בחירת תאריך מובנה באנדרואיד -->
+                        <DatePicker x:Name="WorkDatePicker" Format="dd/MM/yyyy" TextColor="#2C3E50"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- שני שדות בשורה אחת: שעות ושכר (שימוש ב-Grid) -->
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+
+                    <!-- מספר שעות עבודה (עמודה ימנית) -->
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="מספר שעות:" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                        <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="5,0">
+                            <!-- מקלדת נומרית בלבד לאנדרואיד -->
+                            <Entry x:Name="HoursWorkedEntry" Keyboard="Numeric" Placeholder="0.0" TextColor="#2C3E50"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- שכר לשעה (עמודה שמאלית) -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="שכר לשעה (₪):" TextColor="#7F8C8D" FontAttributes="Bold" FontSize="14"/>
+                        <Border StrokeShape="RoundRectangle 8" Stroke="#BDC3C7" BackgroundColor="White" Padding="5,0">
+                            <!-- מקלדת נומרית בלבד לאנדרואיד -->
+                            <Entry x:Name="HourlyRateEntry" Keyboard="Numeric" Placeholder="₪0.00" TextColor="#2C3E50"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <!-- כפתור שמירה חגיגי ומעוצב -->
+                <Button x:Name="SaveJobBtn"
+                    Text="שמירת נתונים בפיירבייס" 
+                    Clicked="OnSaveJobButtonClicked"
+                    BackgroundColor="#27AE60" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    FontSize="16"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Margin="0,15,0,0"
+                    HorizontalOptions="Fill"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+

@@ -10,6 +10,20 @@
      SemanticProperties.Hint="delete"
      Clicked="OnDeleteButtonClicked"
      HorizontalOptions="Fill" />
+
+            <Button Text="חזור למסך הראשי"
+        Clicked="OnBackToMainClicked"
+        BackgroundColor="#2196F3"
+        TextColor="White"
+        CornerRadius="8"
+        Margin="10" />
+
+            <Button Text="התנתק מהמערכת"
+        Clicked="OnLogoutClicked"
+        BackgroundColor="#F44336"
+        TextColor="White"
+        CornerRadius="8"
+        Margin="10" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
